@@ -1,17 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDom from 'react-dom'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+function Greeting(props){
+  return <h4>This is {props.name} and this is my {props.number} component</h4>;
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+class Greetings extends React.Component {
+  render(){
+    return <h2> Hi, this is {this.props.name}</h2>
+  }
+}
+
+ReactDom.render(<Greetings name='Sahib'/>, document.querySelector('#root'));
+ReactDom.render(<Greeting name='Sahib' number='first'/>, document.querySelector('#root1'));
