@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 const UseStateCounter = () => {
   const [value, setValue] = useState(0);
 
-  const resetValue = () => {
-    setValue(0);
-  }
+  // const resetValue = () => {
+  //   setValue(0);
+  // }
 
   const complexIncrease = () => {
     setTimeout(() => {
