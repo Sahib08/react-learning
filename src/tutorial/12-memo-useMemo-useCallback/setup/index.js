@@ -13,7 +13,7 @@ const calculateMostExpensive = (data) => {
       total=price
     }
     return total;
-  }, 0) /100
+  }, 0) /100 // returning a number that is why 0
 }
 
 const Index = () => {
@@ -33,7 +33,7 @@ const Index = () => {
         click me
       </button>
       <h1 style={{marginTop: '3rem'}}> cart: {cart}</h1>
-      <h1>Most Expensive: ${mostExpensive(products)}</h1>
+      <h1>Most Expensive: ${mostExpensive}</h1>
       <BigList products={products} addToCart={addToCart}/>
     </>
   )
