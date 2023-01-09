@@ -9,7 +9,6 @@ export const useFetch = (url) => {
         const products = await response.json()
         setProducts(products)
         setLoading(false)
-        console.log('getProducts');
     }, [url]);
 
     useEffect(() => {

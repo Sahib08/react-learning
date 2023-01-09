@@ -19,6 +19,10 @@ const StyleNavbar = () => {
     <NavLink to='/products' className={({isActive}) => {
         return isActive ? 'link active' : 'link'
     }}>Products</NavLink>
+
+    <NavLink to='/login' className={({isActive}) => {
+        return isActive ? 'link active' : 'link'
+    }}>Login</NavLink>
     </nav>
   )
 }

@@ -6,7 +6,7 @@ const MultipleReturns = () => {
   const [isError, setError] = useState(false);
   const [user, setUser] = useState('default User');
 
-  // it fectes data and return accordingly - simple example
+  // it fetches data and return accordingly - simple example
   useEffect(()=> {
     fetch(url).then((data) => {
       if(data.status >= 200 && data.status <=299){

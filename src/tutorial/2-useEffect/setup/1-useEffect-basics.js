@@ -6,7 +6,7 @@ const UseEffectBasics = () => {
   const [value, setValue] = useState(0);
 
   // You can call as many useEffect you want.
-  // this is [] called dependencies, if empty it will only run at first render and that it
+  // this is [] called dependencies, if empty it will only run at first render and thats it
   useEffect(() => {
     console.log('Another useEffect');
   }, []);
