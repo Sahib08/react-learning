@@ -1,7 +1,6 @@
 import { React, useState } from 'react';
 
 const Menu = ({items}) => {
-  const [menuItem, setMenuItem] = useState(items);
 
   return <div className='section-center'>
     {
@@ -13,7 +12,7 @@ const Menu = ({items}) => {
             <div className='item-info'>
               <header>
                 <h4>{title}</h4>
-                <h4 className='price'>${price}</h4>
+                <h4 className='price'>${price || 3.99}</h4>
               </header>
               <p className='item-text'>{desc}</p>
             </div>
