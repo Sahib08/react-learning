@@ -1,34 +1,36 @@
 import {create} from 'zustand';
 
 export const useRecipeStore = create( (set, get) => ({
- allRecipes: [],
- filteredRecipes: [],
- categories: [],
+ allRecipes: [], // data
+ filteredRecipes: [], // menuitems
+ categories: [], // categories
  getRecipesAsyncActions: async () => {
     const resp = await fetch('https://api.sampleapis.com/recipes/recipes');
     const json = await resp.json();
-    setData(json);
+    //setData(json);
     set( state => ({ ...state, allRecipes: json }))
-    setCategories([
-      "all",
-      ...new Set(
-        json.map((item) => (item.cuisine !== "" ? item.cuisine : "other")).sort()
-      ),
-    ])
-  },
+    set( state => ({ ...state, categories: [
+        "all",
+        ...new Set(
+          json.map((item) => (item.cuisine !== "" ? item.cuisine : "other")).sort()
+        )] 
+    }))
+  }, //getData
   setFilteredRecipesAction: (category) => {
     if (category === "all") {
-      setMenuItems(data);
+      // setMenuItems(data);
+      set( state => ({ ...state, filteredRecipes: get().allRecipes }))
       return;
     }
-    const newItems = data.filter((item) => {
+    const newItems = get().allRecipes.filter((item) => {
       if (category === "other") {
         return item.cuisine === "";
       }
       return item.cuisine === category;
     });
-    console.log(newItems);
-    setMenuItems(newItems);
+    // setMenuItems(newItems);
+    set( state => ({ ...state, filteredRecipes: newItems }))
+
   },
   setCategoriesAction: () => {
     set( state => ({ 
@@ -36,7 +38,7 @@ export const useRecipeStore = create( (set, get) => ({
         categories: [
             "all",
             ...new Set(
-            json.map((item) => (item.cuisine !== "" ? item.cuisine : "other")).sort()
+            get().map((item) => (item.cuisine !== "" ? item.cuisine : "other")).sort()
             ),
         ]
     }))

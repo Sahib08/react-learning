@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from "react";
-import Menu from "./Menu";
-import Categories from "./Categories";
+import React, { useEffect } from "react";
+import Menu from "./components/Menu";
+import Categories from "./components/Categories";
+import { useRecipeStore } from "./store/recipeStore";
+// import { shallow } from 'zustand/shallow'
 
 function App() {
-  const [data, setData] = useState([]);
-  const [menuItems, setMenuItems] = useState([]);
-  const [categories, setCategories] = useState([]);
+  // const [data, setData] = useState([]);
+  // const [menuItems, setMenuItems] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
+  const recipes = useRecipeStore((state) => state.allRecipes)
+  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes)
+  const categories = useRecipeStore((state) => state.categories)
 
-  const getData = async () => {
+  const getRecipesAsyncActions = useRecipeStore((state) => state.getRecipesAsyncActions)
+  const setCategories = useRecipeStore((state) => state.setCategories)
+  const setFilteredRecipesAction = useRecipeStore((state) => state.setFilteredRecipesAction)
+  
+
+  /* const getData = async () => {
     const resp = await fetch('https://api.sampleapis.com/recipes/recipes');
     const json = await resp.json();
     setData(json);
@@ -18,17 +28,17 @@ function App() {
         json.map((item) => (item.cuisine !== "" ? item.cuisine : "other")).sort()
       ),
     ])
-  }
+  } */
 
   useEffect(() => {
-    getData();
+    getRecipesAsyncActions()
   }, []);
 
   useEffect(() => {
-    setMenuItems(data)
-  }, [data]);
+    setFilteredRecipesAction(categories[0])
+  }, [recipes]);
 
-  const filterItems = (category) => {
+/*   const filterItems = (category) => {
     if (category === "all") {
       setMenuItems(data);
       return;
@@ -41,7 +51,7 @@ function App() {
     });
     console.log(newItems);
     setMenuItems(newItems);
-  };
+  }; */
 
   return (
     <main>
@@ -50,8 +60,8 @@ function App() {
           <h2>Our Menu</h2>
           <div className="underline"></div>
         </div>
-        <Categories categories={categories} filterItems={filterItems} />
-        <Menu items={menuItems} />
+        <Categories categories={categories} filterItems={setFilteredRecipesAction} />
+        <Menu items={filteredRecipes} />
       </section>
     </main>
   );

@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./Menu";
-import Categories from "./Categories";
-import { useRecipeStore } from "./store/recipeStore";
-import { shallow } from 'zustand/shallow'
+import Menu from "./components/Menu";
+import Categories from "./components/Categories";
 
 function App() {
   const [data, setData] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const recipes = useRecipeStore((state) => state.allRecipes)
 
   const getData = async () => {
     const resp = await fetch('https://api.sampleapis.com/recipes/recipes');
