@@ -1,40 +1,43 @@
 import React, { useState, useEffect } from "react";
 import Menu from "./Menu";
 import Categories from "./Categories";
-import items from "./data";
-
-const allCategories = [
-  "all",
-  ...new Set(
-    items.map((item) => (item.cuisine !== "" ? item.cuisine : "other")).sort()
-  ),
-];
+import { useRecipeStore } from "./store/recipeStore";
+import { shallow } from 'zustand/shallow'
 
 function App() {
-  const [menuItems, setMenuItems] = useState(items);
-  const [categories, setCategories] = useState(allCategories);
+  const [data, setData] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  /*   const getData = async () => {
-    const resp = await fetch('https://api.sampleapis.com/wines/reds');
+  const recipes = useRecipeStore((state) => state.allRecipes)
+
+  const getData = async () => {
+    const resp = await fetch('https://api.sampleapis.com/recipes/recipes');
     const json = await resp.json();
     setData(json);
+    setCategories([
+      "all",
+      ...new Set(
+        json.map((item) => (item.cuisine !== "" ? item.cuisine : "other")).sort()
+      ),
+    ])
   }
 
   useEffect(() => {
     getData();
-  }, []); */
+  }, []);
 
   useEffect(() => {
-    console.log("categories: ", categories);
-  }, []);
+    setMenuItems(data)
+  }, [data]);
 
   const filterItems = (category) => {
     if (category === "all") {
-      setMenuItems(items);
+      setMenuItems(data);
       return;
     }
-    const newItems = items.filter((item) => {
-      if (category == "other") {
+    const newItems = data.filter((item) => {
+      if (category === "other") {
         return item.cuisine === "";
       }
       return item.cuisine === category;
