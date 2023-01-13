@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { truncateAfterWord } from "./utils/helper";
+import { truncateAfterWord } from "../utils/helper";
 
 const Menu = ({items}) => {
   const [menuItem, setMenuItem] = useState(items);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./Menu";
-import Categories from "./Categories";
+import Menu from "./components/Menu";
+import Categories from "./components/Categories";
 import { useRecipeStore } from "./store/recipeStore";
 import { shallow } from 'zustand/shallow'
 
